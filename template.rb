@@ -34,10 +34,19 @@ Rails.application.config.generators do |g|
 end
 GENERATORS
 
+# Default Page
+file 'app/controllers/pages_controller.rb', <<-PAGES_CONTROLLER
+class PagesController < ApplicationController
+end
+PAGES_CONTROLLER
+
+file 'app/views/pages/index.html.erb'
+
 # Routes
 remove_file 'config/routes.rb'
 file 'config/routes.rb', <<-ROUTES
 #{app_const}.routes.draw do
+  root :to => 'pages#index'
 end
 ROUTES
 

@@ -19,4 +19,14 @@ source 'http://rubygems.org'
 gem 'rails', '#{Rails::VERSION::STRING}'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
+
+group :development, :test do
+  gem 'jquery-rails'
+end
 GEMFILE
+
+# Bundler
+run 'bundle install'
+
+# Post Bundle
+generate 'jquery:install --force'

@@ -10,3 +10,13 @@ remove_file 'public/images/rails.png'
 file 'README', <<-README
 #{app_name.humanize}
 README
+
+# Gemfile
+remove_file 'Gemfile'
+file 'Gemfile', <<-GEMFILE
+source 'http://rubygems.org'
+
+gem 'rails', '#{Rails::VERSION::STRING}'
+
+gem 'sqlite3-ruby', :require => 'sqlite3'
+GEMFILE

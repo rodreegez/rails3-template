@@ -22,6 +22,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
   gem 'jquery-rails'
+  gem 'rspec-rails', '>= 2.0.1', :group => [:development, :test]
+  gem 'shoulda'
 end
 GEMFILE
 
@@ -30,3 +32,4 @@ run 'bundle install'
 
 # Post Bundle
 generate 'jquery:install --force'
+generate 'rspec:install'

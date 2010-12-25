@@ -22,7 +22,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
   gem 'jquery-rails'
-  gem 'rspec-rails', '>= 2.0.1', :group => [:development, :test]
+  gem 'rspec-rails', '>= 2.3.1', :group => [:development, :test]
   gem 'shoulda'
 end
 GEMFILE

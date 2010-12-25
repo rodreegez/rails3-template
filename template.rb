@@ -34,6 +34,13 @@ Rails.application.config.generators do |g|
 end
 GENERATORS
 
+# Routes
+remove_file 'config/routes.rb'
+file 'config/routes.rb', <<-ROUTES
+#{app_const}.routes.draw do
+end
+ROUTES
+
 # Bundler
 run 'bundle install'
 

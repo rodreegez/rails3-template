@@ -1,3 +1,6 @@
+# App name
+app_title = app_name.humanize.titleize
+
 # Remove unnecessary files
 remove_file 'README'
 remove_file 'public/index.html'
@@ -8,7 +11,7 @@ remove_file 'public/images/rails.png'
 
 # Create README
 file 'README', <<-README
-#{app_name.humanize}
+#{app_title}
 README
 
 # Gemfile
@@ -49,6 +52,23 @@ file 'config/routes.rb', <<-ROUTES
   root :to => 'pages#index'
 end
 ROUTES
+
+# Application Layout
+remove_file 'app/views/layouts/application.html.erb'
+file 'app/views/layouts/application.html.erb', <<-APPLICATION_LAYOUT
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>#{app_title}</title>
+    <%= stylesheet_link_tag :all %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <%= yield %>
+    <%= javascript_include_tag :defaults %>
+  </body>
+</html>
+APPLICATION_LAYOUT
 
 # Bundler
 run 'bundle install'

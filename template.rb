@@ -27,6 +27,13 @@ group :development, :test do
 end
 GEMFILE
 
+# Generators
+initializer 'generators.rb', <<-GENERATORS
+Rails.application.config.generators do |g|
+  g.test_framework = :rspec
+end
+GENERATORS
+
 # Bundler
 run 'bundle install'
 

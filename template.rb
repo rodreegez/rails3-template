@@ -390,6 +390,97 @@ class <%= controller_class_name %>Controller < ApplicationController
 end
 SCAFFOLD_CONTROLLER
 
+# Scaffold ERB Templates
+file 'lib/templates/erb/scaffold/_form.html.erb', <<-SCAFFOLD_FORM_TEMPLATE
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+
+      <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+        <li><%%= msg %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+
+<% for attribute in attributes -%>
+  <p>
+    <%%= f.label :<%= attribute.name %> %><br />
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  </p>
+<% end -%>
+  <p>
+    <%%= f.submit %>
+  </p>
+<%% end %>
+SCAFFOLD_FORM_TEMPLATE
+
+file 'lib/templates/erb/scaffold/edit.html.erb', <<-SCAFFOLD_EDIT_TEMPLATE
+<h2>Edit <%= singular_table_name.titleize %></h2>
+
+<%%= render 'form' %>
+
+<p>
+<%%= link_to 'Show', @<%= singular_table_name %> %> |
+<%%= link_to 'View All', <%= index_helper %>_path %>
+</p>
+SCAFFOLD_EDIT_TEMPLATE
+
+file 'lib/templates/erb/scaffold/index.html.erb', <<-SCAFFOLD_INDEX_TEMPLATE
+<h2><%= plural_table_name.titleize %></h2>
+
+<table>
+  <tr>
+<% for attribute in attributes -%>
+    <th><%= attribute.human_name %></th>
+<% end -%>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <tr>
+<% for attribute in attributes -%>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+    <td><%%= link_to 'Show', <%= singular_table_name %> %></td>
+    <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
+    <td><%%= link_to 'Destroy', <%= singular_table_name %>, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<%% end %>
+</table>
+
+<p><%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path %></p>
+SCAFFOLD_INDEX_TEMPLATE
+
+file 'lib/templates/erb/scaffold/new.html.erb', <<-SCAFFOLD_NEW_TEMPLATE
+<h2>New <%= singular_table_name.titleize %></h2>
+
+<%%= render 'form' %>
+
+<p><%%= link_to 'Back to List', <%= index_helper %>_path %></p>
+SCAFFOLD_NEW_TEMPLATE
+
+file 'lib/templates/erb/scaffold/show.html.erb', <<-SCAFFOLD_SHOW_TEMPLATE
+<h2><%= singular_table_name.titleize %></h2>
+
+<% for attribute in attributes -%>
+<p>
+  <strong><%= attribute.human_name %>:</strong>
+  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+</p>
+
+<% end -%>
+
+<p>
+<%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
+<%%= link_to 'View All', <%= index_helper %>_path %>
+</p>
+SCAFFOLD_SHOW_TEMPLATE
+
 # Bundler
 run 'bundle install'
 

@@ -167,7 +167,7 @@ textarea {width:390px;height:250px;padding:5px;}
 form.inline {line-height:3;}
 form.inline p {margin-bottom:0;}
 .error, .notice {padding:0.8em;margin-bottom:1em;border:2px solid #ddd;}
-.error, {background:#fbe3e4;color:#8a1f11;border-color:#fbc2c4;}
+.error {background:#fbe3e4;color:#8a1f11;border-color:#fbc2c4;}
 .notice {background:#e6efc2;color:#264409;border-color:#c6d880;}
 .error a, .alert a {color:#8a1f11;}
 .notice a {color:#264409;}
@@ -331,6 +331,9 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+
+/* rails */
+.field_with_errors {display:inline;}
 STYLE
 
 # jQuery
@@ -393,9 +396,8 @@ SCAFFOLD_CONTROLLER
 file 'lib/templates/erb/scaffold/_form.html.erb', <<-SCAFFOLD_FORM_TEMPLATE
 <%%= form_for(@<%= singular_table_name %>) do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
-    <div id="error_explanation">
-      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
-
+    <div class="error">
+      <strong><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</strong>
       <ul>
       <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
         <li><%%= msg %></li>

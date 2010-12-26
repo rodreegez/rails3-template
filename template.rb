@@ -71,7 +71,7 @@ file 'app/views/layouts/application.html.erb', <<-APPLICATION_LAYOUT
   <body>
     <div class="container">
       <header>
-        <h1>#{app_title}</h1>
+        <h1><%= link_to #{app_title}, root_path %></h1>
       </header>
       <%= yield %>
     </div>

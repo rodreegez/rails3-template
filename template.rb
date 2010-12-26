@@ -23,7 +23,6 @@ gem 'rails', '#{Rails::VERSION::STRING}'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
-  gem 'jquery-rails'
   gem 'rspec-rails', '>= 2.3.1', :group => [:development, :test]
   gem 'shoulda'
 end
@@ -335,9 +334,16 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clear {clear:both;}
 STYLE
 
+# jQuery
+inside "public/javascripts" do
+  get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "rails.js"
+  get "http://code.jquery.com/jquery-1.4.4.js", "jquery.js"
+end
+
+gsub_file "config/application.rb", /config\.action_view\.javascript.*\n/, "config.action_view.javascript_expansions[:defaults] = %w(jquery rails)\n"
+
 # Bundler
 run 'bundle install'
 
 # Post Bundle
-generate 'jquery:install --force'
 generate 'rspec:install'

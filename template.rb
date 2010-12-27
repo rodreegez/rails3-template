@@ -69,7 +69,7 @@ file 'app/views/layouts/application.html.erb', <<-APPLICATION_LAYOUT
   </head>
   <body>
     <div class="container">
-      <header>
+      <header class="span-24 prepend-top">
         <h1><%= link_to '#{app_title}', root_path %></h1>
         <%- flash.each do |name, msg| -%>
           <%= content_tag :div, msg, :class => "#\{name\}" %>

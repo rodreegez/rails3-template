@@ -487,3 +487,8 @@ run 'bundle install'
 
 # Post Bundle
 generate 'rspec:install'
+
+# Git
+git :init
+git :add => "."
+git :commit => "-m 'Initial commit'"

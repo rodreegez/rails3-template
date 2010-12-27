@@ -21,4 +21,4 @@ A Rails 3 application template
 * Downloads jQuery and Rails jQuery-ujs
 * Scaffold controller templates don't include respond_to blocks
 * Removes flash messages from ERB Templates, cleans up scaffold views
-* Creates a git repository and does and initial commit
+* Creates a git repository and does an initial commit

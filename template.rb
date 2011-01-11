@@ -23,12 +23,14 @@ gem 'rails', '#{Rails::VERSION::STRING}'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
+  gem 'rails3-generators'
   gem 'rspec-rails', '>= 2.3.1'
 end
 
 group :test do
   gem 'capybara'
   gem 'cucumber-rails'
+  gem 'factory_girl_rails'
   gem 'shoulda'
 end
 GEMFILE
@@ -42,6 +44,8 @@ Rails.application.config.generators do |g|
   g.helper false
   g.request_specs false
   g.stylesheets false
+  g.fixture true
+  g.fixture_replacement = :factory_girl
 end
 GENERATORS
 
@@ -492,6 +496,9 @@ run 'bundle install'
 # Post Bundle
 generate 'rspec:install'
 generate 'cucumber:install --capybara --rspec'
+
+# Cucumber Factory Girl integration
+append_file 'features/support/env.rb', "\nrequire 'factory_girl/step_definitions'" 
 
 # Git
 git :init

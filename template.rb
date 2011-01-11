@@ -23,7 +23,12 @@ gem 'rails', '#{Rails::VERSION::STRING}'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
-  gem 'rspec-rails', '>= 2.3.1', :group => [:development, :test]
+  gem 'rspec-rails', '>= 2.3.1'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'cucumber-rails'
   gem 'shoulda'
 end
 GEMFILE
@@ -487,6 +492,7 @@ run 'bundle install'
 
 # Post Bundle
 generate 'rspec:install'
+generate 'cucumber:install --capybara --rspec'
 
 # Git
 git :init

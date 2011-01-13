@@ -21,6 +21,7 @@ source 'http://rubygems.org'
 gem 'rails', '#{Rails::VERSION::STRING}'
 
 gem 'compass'
+gem 'formtastic', '~> 1.1.0'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
@@ -47,6 +48,8 @@ Rails.application.config.generators do |g|
   g.stylesheets false
   g.fixture true
   g.fixture_replacement = :factory_girl
+  g.template_engine = :erubis
+  g.form_builder = :formtastic
 end
 GENERATORS
 

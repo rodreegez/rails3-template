@@ -18,5 +18,6 @@ A Rails 3 application template
 * Sets root route to pages#index
 * Application layout includes flash messages, page title, and script tags moved to bottom of the body
 * Installs Compass CSS framework
+* Installs Formtastic
 * Downloads jQuery and Rails jQuery-ujs
 * Creates a git repository and does an initial commit

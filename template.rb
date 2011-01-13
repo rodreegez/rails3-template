@@ -20,6 +20,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '#{Rails::VERSION::STRING}'
 
+gem 'compass'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development, :test do
@@ -72,19 +73,15 @@ file 'app/views/layouts/application.html.erb', <<-APPLICATION_LAYOUT
 <html>
   <head>
     <title>#{app_title}</title>
-    <%= stylesheet_link_tag :all %>
+    <%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <div class="container">
-      <header class="span-24 prepend-top">
-        <h1><%= link_to '#{app_title}', root_path %></h1>
-        <%- flash.each do |name, msg| -%>
-          <%= content_tag :div, msg, :class => "#\{name\}" %>
-        <%- end -%>
-      </header>
-      <%= yield %>
-    </div>
+    <h1><%= link_to '#{app_title}', root_path %></h1>
+    <%- flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, :class => "#\{name\}" %>
+    <%- end -%>
+    <%= yield %>
     <%= javascript_include_tag :defaults %>
   </body>
 </html>
@@ -107,6 +104,15 @@ generate 'cucumber:install --capybara --rspec'
 
 # Cucumber Factory Girl integration
 append_file 'features/support/env.rb', "\nrequire 'factory_girl/step_definitions'" 
+
+# Compass
+run 'compass init rails --sass-dir=app/stylesheets --css-dir=public/stylesheets/'
+remove_file 'app/stylesheets/screen.scss'
+remove_file 'app/stylesheets/print.scss'
+remove_file 'app/stylesheets/ie.scss'
+file 'app/stylesheets/screen.scss', <<-CSS
+@import "compass/reset";
+CSS
 
 # Git
 git :init

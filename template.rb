@@ -1,4 +1,4 @@
-# App name
+# App title
 app_title = app_name.humanize.titleize
 
 # Remove unnecessary files

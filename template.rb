@@ -5,7 +5,6 @@ app_title = app_name.humanize.titleize
 remove_file 'README'
 remove_file 'public/index.html'
 remove_file 'public/robots.txt'
-remove_file 'public/index.html'
 remove_file 'public/images/rails.png'
 
 # Create README

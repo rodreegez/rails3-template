@@ -81,6 +81,8 @@ file 'app/views/layouts/application.html.erb', <<-APPLICATION_LAYOUT
       <div class="container">
         <div id="header">
           <h1><%= link_to '#{app_title}', root_path %></h1>
+          <ul id="nav">
+          </ul>
         </div>
       </div>
     </div>
@@ -316,12 +318,40 @@ body {
 
 #header {
   h1 {
+    float: left;
     @include text-shadow(rgba(#000,.3), 1px, 1px, 4px);
     margin-bottom: 0;
     color: $header-title-color;
     a {
       @include link-colors($header-title-color, $header-title-color, $header-title-color, $header-title-color);
       @include unstyled-link;
+    }
+  }
+
+  #nav {
+    float: right;
+    list-style: none;
+
+    li {
+      float: left;
+      margin: 0 0 0 5px;
+
+      a {
+        @include unstyled-link;
+        padding: 5px 15px;
+        font-weight: bold;
+        color: $header-title-color;
+        color: rgba($header-title-color, 0.8);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+        @include border-radius(14px);
+        @include transition(all, 0.3s, ease-in-out);
+      }
+
+      a:hover, li a:focus {
+        font-weight: bold;
+        color: $header-title-color;
+        background: rgba($header-title-color, 0.15);
+      }
     }
   }
 }

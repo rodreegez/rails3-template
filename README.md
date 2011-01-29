@@ -17,6 +17,8 @@ A Rails 3 application template
 * Creates a PagesController and blank index view
 * Sets root route to pages#index
 * Application layout includes flash messages, page title, and script tags moved to bottom of the body
+* Scaffold controller templates don't include respond_to blocks
+* Removes flash messages from ERB Templates, cleans up scaffold views
 * Installs Compass CSS framework
 * Installs Simple Form
 * Downloads jQuery and Rails jQuery-ujs

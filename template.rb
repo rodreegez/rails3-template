@@ -31,7 +31,7 @@ end
 group :test do
   gem 'capybara'
   gem 'cucumber-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '1.1.beta1'
   gem 'shoulda'
 end
 GEMFILE
@@ -46,7 +46,7 @@ Rails.application.config.generators do |g|
   g.request_specs false
   g.stylesheets false
   g.fixture true
-  g.fixture_replacement = :factory_girl
+  g.fixture_replacement :factory_girl, :dir => 'spec/factories'
 end
 GENERATORS
 
@@ -120,6 +120,10 @@ run 'bundle install'
 generate 'rspec:install'
 generate 'cucumber:install --capybara --rspec'
 generate 'simple_form:install'
+
+# Rspec 
+gsub_file 'spec/spec_helper.rb', /(config.fixture_path)/, '# \1'
+inject_into_file 'spec/spec_helper.rb', "\nrequire 'factory_girl'", :after => "require 'rspec/rails'"
 
 # Cucumber Factory Girl integration
 append_file 'features/support/env.rb', "\nrequire 'factory_girl/step_definitions'" 

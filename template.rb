@@ -137,6 +137,7 @@ file 'app/stylesheets/screen.scss', <<-CSS
 @import "compass/reset";
 @import "blueprint/grid";
 @import "blueprint/typography";
+@import "blueprint/interaction";
 @import "compass/css3";
 @import "compass/utilities";
 
@@ -218,6 +219,14 @@ body {
   @include quiet;
   font-size: $blueprint-font-size - 2px;
   text-align: center;
+}
+
+#flash-notice {
+  @include success;
+}
+
+#flash-error {
+  @include error;
 }
 CSS
 

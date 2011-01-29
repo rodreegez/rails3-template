@@ -138,6 +138,7 @@ file 'app/stylesheets/screen.scss', <<-CSS
 @import "blueprint/grid";
 @import "blueprint/typography";
 @import "blueprint/interaction";
+@import "blueprint/form";
 @import "compass/css3";
 @import "compass/utilities";
 
@@ -227,6 +228,39 @@ body {
 
 #flash-error {
   @include error;
+}
+
+.simple_form {
+  @include blueprint-form;
+
+  :focus {
+    outline: 0 none;
+  }
+
+  abbr {
+    border-bottom: none;
+  }
+
+  input, textarea {
+    display: block;
+  }
+
+  div.input, div.actions {
+    @include append-bottom;
+  }
+
+  .error {
+    font-size: $blueprint-font-size;
+    color: #D00;
+    display: block;
+  }
+
+  .hint {
+    @include quiet;
+    font-size: $blueprint-font-size;
+    display: block;
+    font-style: italic;
+  }
 }
 CSS
 

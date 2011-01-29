@@ -246,6 +246,7 @@ run 'compass init rails --sass-dir=app/stylesheets --css-dir=public/stylesheets/
 remove_file 'app/stylesheets/screen.scss'
 remove_file 'app/stylesheets/print.scss'
 remove_file 'app/stylesheets/ie.scss'
+append_file '.gitignore', '/public/stylesheets/*.css' 
 file 'app/stylesheets/screen.scss', <<-CSS
 @import "compass/reset";
 @import "blueprint/grid";

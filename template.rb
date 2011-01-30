@@ -1,5 +1,5 @@
 # App title
-app_title = app_name.humanize.titleize
+app_title = app_name.underscore.titleize
 
 # Remove unnecessary files
 remove_file 'README'

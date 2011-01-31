@@ -271,6 +271,14 @@ $headings-color: #333;
 
 $header-title-color: #fff;
 
+@mixin unstyled-link-with-pointer {
+  color: inherit;
+  text-decoration: inherit;
+  &:active, &:focus {
+    outline: none; 
+  } 
+}
+
 body {
   background-color: $body-background-color;
   @include blueprint-typography;
@@ -324,7 +332,7 @@ body {
     color: $header-title-color;
     a {
       @include link-colors($header-title-color, $header-title-color, $header-title-color, $header-title-color);
-      @include unstyled-link;
+      @include unstyled-link-with-pointer;
     }
   }
 
@@ -337,7 +345,7 @@ body {
       margin: 0 0 0 5px;
 
       a {
-        @include unstyled-link;
+        @include unstyled-link-with-pointer;
         padding: 5px 15px;
         font-weight: bold;
         color: $header-title-color;

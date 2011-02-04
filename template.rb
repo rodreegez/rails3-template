@@ -279,6 +279,23 @@ $header-title-color: #fff;
   } 
 }
 
+@mixin blueprint-form-number-input($unfocused_border_color: #bbbbbb, $focus_border_color: #666666, $input_width: 300px) {
+  input {
+    &[type=number] {
+      position: relative;
+      top: 0.25em;
+      width: $input_width;
+      margin: 0.5em 0;
+      background-color: white;
+      padding: 5px;
+      border: 1px solid $unfocused_border_color;
+      &:focus {
+        border: 1px solid $focus_border_color;
+      }
+    }
+  }
+}
+
 body {
   background-color: $body-background-color;
   @include blueprint-typography;
@@ -384,6 +401,7 @@ body {
 
 .simple_form {
   @include blueprint-form;
+  @include blueprint-form-number-input;
 
   :focus {
     outline: 0 none;

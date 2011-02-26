@@ -30,6 +30,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'autotest'
   gem 'capybara'
   gem 'factory_girl_rails', '1.1.beta1'
   gem 'shoulda'

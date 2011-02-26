@@ -20,6 +20,7 @@ source 'http://rubygems.org'
 gem 'rails', '#{Rails::VERSION::STRING}'
 
 gem 'compass'
+gem 'jquery-rails'
 gem 'simple_form'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
@@ -220,18 +221,11 @@ file 'lib/templates/erb/scaffold/show.html.erb', <<-SCAFFOLD_SHOW_TEMPLATE
 </p>
 SCAFFOLD_SHOW_TEMPLATE
 
-# jQuery
-inside 'public/javascripts' do
-  get 'https://github.com/rails/jquery-ujs/raw/master/src/rails.js', 'rails.js'
-  get 'http://code.jquery.com/jquery-1.4.4.js', 'jquery.js'
-end
-
-gsub_file 'config/application.rb', /config\.action_view\.javascript.*\n/, "config.action_view.javascript_expansions[:defaults] = %w(jquery rails)\n"
-
 # Bundler
 run 'bundle install'
 
 # Post Bundle
+generate 'jquery:install -f'
 generate 'rspec:install'
 generate 'cucumber:install --capybara --rspec'
 generate 'simple_form:install'

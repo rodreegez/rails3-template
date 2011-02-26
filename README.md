@@ -13,7 +13,7 @@ A Rails 3 application template
 * Switches from Test::Unit to RSpec
 * Installs Shoulda
 * Changes generators to not create stylesheets or helpers
-* Changes RSpec generators to not create helper, view, routing, and request specs 
+* Changes RSpec generators to not create helper or view specs 
 * Creates a PagesController and blank index view
 * Sets root route to pages#index
 * Application layout includes flash messages, page title, and script tags moved to bottom of the body
@@ -21,5 +21,5 @@ A Rails 3 application template
 * Removes flash messages from ERB Templates, cleans up scaffold views
 * Installs Compass CSS framework
 * Installs Simple Form
-* Downloads jQuery and Rails jQuery-ujs
+* Switches from Prototype to jQuery
 * Creates a git repository and does an initial commit

@@ -228,7 +228,7 @@ generate 'jquery:install -f'
 generate 'rspec:install'
 generate 'simple_form:install'
 
-# Rspec 
+# Rspec
 gsub_file 'spec/spec_helper.rb', /(config.fixture_path)/, '# \1'
 
 # Compass
@@ -236,7 +236,7 @@ run 'compass init rails --sass-dir=app/stylesheets --css-dir=public/stylesheets/
 remove_file 'app/stylesheets/screen.scss'
 remove_file 'app/stylesheets/print.scss'
 remove_file 'app/stylesheets/ie.scss'
-append_file '.gitignore', '/public/stylesheets/*.css' 
+append_file '.gitignore', '/public/stylesheets/*.css'
 file 'app/stylesheets/screen.scss', <<-CSS
 @import "compass/reset";
 @import "blueprint/grid";
@@ -263,8 +263,8 @@ $header-title-color: #fff;
   color: inherit;
   text-decoration: inherit;
   &:active, &:focus {
-    outline: none; 
-  } 
+    outline: none;
+  }
 }
 
 @mixin blueprint-form-number-input($unfocused_border_color: #bbbbbb, $focus_border_color: #666666, $input_width: 300px) {
@@ -361,8 +361,6 @@ body {
       }
 
       a:hover, li a:focus {
-        font-weight: bold;
-        color: $header-title-color;
         background: rgba($header-title-color, 0.15);
       }
     }
@@ -387,7 +385,7 @@ body {
   @include error;
 }
 
-.simple_form {
+.simple_form, .form {
   @include blueprint-form;
   @include blueprint-form-number-input;
 

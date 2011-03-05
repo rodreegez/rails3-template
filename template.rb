@@ -381,7 +381,7 @@ body {
   @include success;
 }
 
-#flash-error {
+#flash-alert {
   @include error;
 }
 

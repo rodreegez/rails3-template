@@ -8,7 +8,7 @@ remove_file 'public/robots.txt'
 remove_file 'public/images/rails.png'
 
 # Create README
-file 'README', <<-README
+file 'README.md', <<-README
 #{app_title}
 README
 

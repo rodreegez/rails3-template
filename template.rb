@@ -25,18 +25,17 @@ gem 'simple_form'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development do
-  gem 'rails3-generators'
   gem 'rails_best_practices'
 end
 
 group :development, :test do
-  gem 'rspec-rails', '>= 2.3.1'
+  gem 'rspec-rails'
 end
 
 group :test do
   gem 'autotest'
   gem 'capybara'
-  gem 'factory_girl_rails', '1.1.beta1'
+  gem 'factory_girl_rails'
   gem 'shoulda'
 end
 GEMFILE
@@ -223,6 +222,57 @@ file 'lib/templates/erb/scaffold/show.html.erb', <<-SCAFFOLD_SHOW_TEMPLATE
 <%%= link_to 'View All', <%= index_helper %>_path %>
 </p>
 SCAFFOLD_SHOW_TEMPLATE
+
+file 'lib/generators/factory_girl.rb', <<-FACTORY_GIRL
+require 'rails/generators'
+
+Rails::Generators.hidden_namespaces << ['factory_girl:model']
+Rails::Generators.hidden_namespaces.flatten!
+
+require 'rails/generators/named_base'
+
+module FactoryGirl
+  module Generators
+    class Base < Rails::Generators::NamedBase #:nodoc:
+      def self.source_root
+        @_factory_girl_source_root ||= File.expand_path(File.join(File.dirname(__FILE__), 'factory_girl', generator_name, 'templates'))
+      end
+    end
+  end
+end
+FACTORY_GIRL
+
+file 'lib/generators/factory_girl/model/model_generator.rb', <<-MODEL_GENERATOR
+require 'generators/factory_girl'
+
+module FactoryGirl
+  module Generators
+    class ModelGenerator < Base
+      argument :attributes, :type => :array, :default => [], :banner => 'field:type field:type'
+      class_option :dir, :type => :string, :default => 'test/factories', :desc => 'The directory where the factories should go'
+
+      def create_fixture_file
+        version = nil
+        begin
+          require 'factory_girl'
+          version = Factory::VERSION.to_i
+        rescue Object => e
+          raise 'Please install Factory_girl or add it to your Gemfile'
+        end
+
+        template 'fixtures.rb', File.join(options[:dir], "#\{table_name\}.rb")
+      end
+    end
+  end
+end
+MODEL_GENERATOR
+
+file 'lib/generators/factory_girl/model/templates/fixtures.rb', <<-FIXTURES
+Factory.define :<%= singular_name %> do |f|
+<% for attribute in attributes -%>
+  f.<%= attribute.name %> <%= attribute.default.inspect %>
+<% end -%>end
+FIXTURES
 
 # Bundler
 run 'bundle install'

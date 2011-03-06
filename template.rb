@@ -49,7 +49,7 @@ Rails.application.config.generators do |g|
   g.helper false
   g.stylesheets false
   g.fixture true
-  g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+  g.fixture_replacement :factory_girl
 end
 GENERATORS
 
@@ -249,7 +249,7 @@ module FactoryGirl
   module Generators
     class ModelGenerator < Base
       argument :attributes, :type => :array, :default => [], :banner => 'field:type field:type'
-      class_option :dir, :type => :string, :default => 'test/factories', :desc => 'The directory where the factories should go'
+      class_option :dir, :type => :string, :default => 'spec/factories', :desc => 'The directory where the factories should go'
 
       def create_fixture_file
         begin

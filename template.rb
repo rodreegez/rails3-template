@@ -24,8 +24,12 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-group :development, :test do
+group :development do
   gem 'rails3-generators'
+  gem 'rails_best_practices'
+end
+
+group :development, :test do
   gem 'rspec-rails', '>= 2.3.1'
 end
 

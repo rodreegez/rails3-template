@@ -252,11 +252,9 @@ module FactoryGirl
       class_option :dir, :type => :string, :default => 'test/factories', :desc => 'The directory where the factories should go'
 
       def create_fixture_file
-        version = nil
         begin
           require 'factory_girl'
-          version = Factory::VERSION.to_i
-        rescue Object => e
+        rescue LoadError
           raise 'Please install Factory_girl or add it to your Gemfile'
         end
 

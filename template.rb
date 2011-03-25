@@ -38,6 +38,10 @@ group :test do
 end
 GEMFILE
 
+file '.rvmrc', <<-RVM
+rvm use --create 1.9.2-p180@#{app_title}
+RVM
+
 # Generators
 initializer 'generators.rb', <<-GENERATORS
 Rails.application.config.generators do |g|

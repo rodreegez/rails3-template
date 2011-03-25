@@ -1,5 +1,3 @@
-require 'rvm'
-
 # App title
 app_title = app_name.underscore.titleize
 
@@ -15,8 +13,19 @@ file 'README.md', <<-README
 README
 
 # RVM
-run "rvm use 1.9.2-p180@#{app_title.downcase} --rvmrc --create"
-RVM.gemset_use! app_title.downcase
+if ENV['MY_RUBY_HOME'] && ENV['MY_RUBY_HOME'].include?('rvm')
+  begin
+    rvm_path     = File.dirname(File.dirname(ENV['MY_RUBY_HOME']))
+    rvm_lib_path = File.join(rvm_path, 'lib')
+    $LOAD_PATH.unshift rvm_lib_path
+    require 'rvm'
+    run "rvm use 1.9.2-p180@#{app_title.downcase} --rvmrc --create"
+    RVM.gemset_use! app_title.downcase
+  rescue LoadError
+    # RVM is unavailable at this point.
+    raise "RVM is currently unavailable, skipping creating a .rvmrc"
+  end
+end
 
 # Gemfile
 remove_file 'Gemfile'

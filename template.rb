@@ -15,14 +15,12 @@ README
 # Gemfile
 remove_file 'Gemfile'
 file 'Gemfile', <<-GEMFILE
-source 'http://rubygems.org'
+source :rubygems
 
 gem 'rails', '#{Rails::VERSION::STRING}'
 
-gem 'compass'
 gem 'jquery-rails'
-gem 'simple_form'
-gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'pg'
 
 group :development do
   gem 'rails_best_practices'
@@ -33,7 +31,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'autotest'
+  gem 'watchr'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'shoulda'

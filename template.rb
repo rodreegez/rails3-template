@@ -1,3 +1,5 @@
+require 'rvm'
+
 # App title
 app_title = app_name.underscore.titleize
 
@@ -11,6 +13,10 @@ remove_file 'public/images/rails.png'
 file 'README.md', <<-README
 #{app_title}
 README
+
+# RVM
+run "rvm use 1.9.2-p180@#{app_title.downcase} --rvmrc --create"
+RVM.gemset_use! app_title.downcase
 
 # Gemfile
 remove_file 'Gemfile'
@@ -37,10 +43,6 @@ group :test do
   gem 'shoulda'
 end
 GEMFILE
-
-file '.rvmrc', <<-RVM
-rvm use --create 1.9.2-p180@#{app_title}
-RVM
 
 # Generators
 initializer 'generators.rb', <<-GENERATORS
@@ -296,6 +298,7 @@ end
 WATCHR
 
 # Bundler
+run "gem install bundler"
 run 'bundle install'
 
 # Post Bundle

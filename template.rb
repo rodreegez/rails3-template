@@ -1,11 +1,15 @@
 # App title
 app_title = app_name.underscore.titleize
 
+# User
+user=`whoami`
+
 # Remove unnecessary files
 remove_file 'README'
 remove_file 'public/index.html'
 remove_file 'public/robots.txt'
 remove_file 'public/images/rails.png'
+remove_file 'config/database.yml'
 
 # Create README
 file 'README.md', <<-README
@@ -26,6 +30,23 @@ if ENV['MY_RUBY_HOME'] && ENV['MY_RUBY_HOME'].include?('rvm')
     raise "RVM is currently unavailable, skipping creating a .rvmrc"
   end
 end
+
+# PostgreSQL
+file 'config/database.yml', <<-DATABASE
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  username: #{user}
+  password: ""
+
+development:
+  <<: *common
+  database: #{app_title.downcase}_development
+
+test:
+  <<: *common
+  database: #{app_title.downcase}_test
+DATABASE
 
 # Gemfile
 remove_file 'Gemfile'
@@ -308,7 +329,7 @@ WATCHR
 
 # Bundler
 run "gem install bundler"
-run 'bundle install'
+run '(bundle check || bundle install)'
 
 # Post Bundle
 generate 'jquery:install -f'

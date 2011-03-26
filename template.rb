@@ -36,6 +36,7 @@ file 'config/database.yml', <<-DATABASE
 common: &common
   adapter: postgresql
   encoding: unicode
+  min_messages: WARNING
   username: #{user}
   password: ""
 

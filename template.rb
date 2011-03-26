@@ -348,6 +348,7 @@ generate 'rspec:install'
 run 'rake db:create:all'
 run 'rake db:migrate'
 run 'rspec spec'
+remove_file 'spec/test_spec.rb'
 
 # Rspec
 gsub_file 'spec/spec_helper.rb', /(config.fixture_path)/, '# \1'

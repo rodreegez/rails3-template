@@ -327,6 +327,15 @@ watch("app/(.*/.*)\.rb") do |match|
 end
 WATCHR
 
+
+file 'spec/test_spec.rb', <<-SPEC
+require 'spec_helper'
+
+describe 'something' do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
+SPEC
+
 # Bundler
 run "gem install bundler"
 run '(bundle check || bundle install)'
@@ -334,6 +343,11 @@ run '(bundle check || bundle install)'
 # Post Bundle
 generate 'jquery:install -f'
 generate 'rspec:install'
+
+# Sanity check
+run 'rake db:create:all'
+run 'rake db:migrate'
+run 'rspec spec'
 
 # Rspec
 gsub_file 'spec/spec_helper.rb', /(config.fixture_path)/, '# \1'
